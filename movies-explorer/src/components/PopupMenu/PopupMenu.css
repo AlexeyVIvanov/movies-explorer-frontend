@@ -1,0 +1,113 @@
+@media screen and (max-width: 917px) {
+  .popupmenu {
+    visibility: hidden;    
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 68%; 
+    height: 100%;      
+}
+
+
+.popupmenu_active {
+    visibility: visible;  
+    display: flex;
+    flex-direction: column;    
+    padding: 22px 22px 90px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.popupmenu__btn {
+    background-image: url(../../images/icon-close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    min-width: 22px;       
+    min-height: 22px;
+    margin: 0 0 105px;
+    border: 0;
+    align-self: flex-end;  
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+.popupmenu__btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.popupmenu__menu {   
+    display: flex; 
+    flex-direction: column;
+    margin-bottom: 621px;
+}
+
+.popupmenu__link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+    text-decoration: none;
+    margin-bottom: 28px;    
+}
+
+.popupmenu__link:hover {
+    opacity: 0.7;
+}
+
+.popupmenu__link:last-child {
+    margin-bottom: 0;
+}
+
+.popupmenu__profile-btn {
+    background: #F9F9F9;
+    border: 0;
+    border-radius: 20px;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    max-height: 32px;
+    max-width: 100px;
+    margin: 0 auto;
+}
+  
+.popupmenu__profile-link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;    
+    text-align: center;
+    align-items: center;
+    color: #000000;    
+    text-decoration: none;       
+}
+
+.popupmenu__profile-link:hover {    
+    opacity: 0.7;
+}
+
+}
+
+@media screen and (max-width: 545px) {
+
+    .popupmenu { 
+      width: 100%;     
+      padding: 13px 13px 46px;      
+    }
+
+    .popupmenu-btn {
+      margin-bottom: 100px;
+    }
+
+    .popupmenu-menu {
+      margin-bottom: 444px;
+    }
+
+    .popupmenu-link {      
+      margin-bottom: 24px;
+  }
+    
+}

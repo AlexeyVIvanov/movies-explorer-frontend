@@ -1,0 +1,132 @@
+.search {
+    padding: 80px 70px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;    
+}
+
+.search__form {
+    width: 100%;    
+    display: flex;
+    justify-content: center;
+    margin: 0 0 30px;          
+}
+
+.search_input-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    margin: 0 10px 0 0;
+}
+
+.search__input { 
+    width: 100%; 
+    height: 100%;  
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #A0A0A0;
+    background: #F9F9F9;
+    border-radius: 4px;
+    border: 0; 
+    padding: 0 0 0 22px; 
+    box-sizing: border-box;  
+}
+
+.search__btn {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #3456F3;
+    border-radius: 40px;
+    border: 0;
+    padding: 13px 5px;
+    box-sizing: border-box;
+    min-width: 70px;
+}
+
+.search__btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.search__input-radio {
+    margin: 0 12px 0 0;
+    background-image: url(../../images/smalltumboff.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 36px;
+    height: 20px;     
+    -webkit-appearance: none;
+    appearance: none;    
+}
+
+.search__input-radio:checked {    
+    background-image: url(../../images/smalltumb.svg);    
+}
+
+.search__input-radio:hover {
+    cursor: pointer;
+}
+
+
+.search__label-radio {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+    margin: 0 auto 39px;
+    display: flex;
+    justify-content: center;
+}
+
+.search__line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #E8E8E8;
+    margin: 0 ;
+    padding: 0;
+}
+
+@media screen and (max-width: 917px) {
+
+    .search {
+        padding: 80px 30px 10px;            
+    }    
+    
+}
+
+@media screen and (max-width: 545px) {
+
+    .search {
+        padding: 80px 14px 10px;           
+    }
+    
+    .search__form {        
+        margin: 0 0 44px;          
+    }    
+    
+    .search__input {         
+        font-size: 12px;        
+        padding: 0 0 0 16px;          
+    }    
+    
+    .search__input-radio {
+        margin: 0 13px 0 0;           
+    }    
+    
+    .search__label-radio {        
+        font-size: 11px;        
+        margin: 0 auto 44px;        
+    }      
+    
+}
