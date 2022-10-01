@@ -11,7 +11,8 @@ function SearchForm() {
             placeholder="Фильм"
             name="searchfilm"
             /*value={""}*/
-            defaultValue=""            
+            defaultValue=""
+            required            
             />
         </fieldset>
         <button
