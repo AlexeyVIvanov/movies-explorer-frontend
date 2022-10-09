@@ -55,13 +55,17 @@
 }
 
 .login__input-error {
-    display: inline-block;
+    display: none;
     font-style: normal;
     font-weight: 500;
     font-size: 10px;
     line-height: 12px;
     color: #FF3055;
     min-height: 12px;
+}
+
+.login__input-error_visible {
+    display: inline-block;
 }
 
 .login__submit {
@@ -83,6 +87,16 @@
 .login__submit:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.login__submit_abled {
+    background: #3456F3;
+    color: #FFFFFF;
+}
+
+.login__submit_disabled {
+    background: #F8F8F8;
+    color: #000000;
 }
 
 .login__signin {

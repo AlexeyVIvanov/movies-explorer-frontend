@@ -1,17 +1,27 @@
 import React from 'react';
 
-function SearchForm() {
+import { useForm } from '../../utils/FormValidation';
+
+function SearchForm(props) {
+
+  const { values, handleChange, setValues } = useForm();
+
+  function handleSubmit(e) { 
+    e.preventDefault();
+    props.handleSearchFilm(values.searchfilm);
+  };
+
   return (
     <section className="search">
-      <form className="search__form">
+      <form className="search__form" onSubmit={handleSubmit}>
         <fieldset className="search_input-container">
           <input
             className="search__input"
             type="text"
             placeholder="Фильм"
             name="searchfilm"
-            /*value={""}*/
-            defaultValue=""
+            value={values.searchfilm || ''}
+            onChange={handleChange}
             required            
             />
         </fieldset>

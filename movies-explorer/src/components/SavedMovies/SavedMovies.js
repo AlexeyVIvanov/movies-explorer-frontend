@@ -5,15 +5,17 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-function SavedMovies() {  
+function SavedMovies(props) {  
   
   return (
     <>
       <Header
         style={{ background: "#FFFFFF" }}
       /> 
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm
+        handleSearchFilm={props.handleSearchFilm} />
+      <MoviesCardList
+        movies={props.movies} />
       <Footer />
     </>
   );

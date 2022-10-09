@@ -2,8 +2,18 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import { useFormWithValidation } from '../../utils/FormValidation';
 
-function Login() {
+function Login(props) {
+  
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.handleLogin(values);
+    resetForm()
+  };
+
   return (
     <section className="login">
       <div className="login__logo-container">
@@ -11,7 +21,7 @@ function Login() {
           <img className="login__logo" src={logo} alt="Логотип" />
         </Link>
       </div>
-      <form>
+      <form onSubmit={handleSubmit} noValidate>
         <h2 className="login__title">
           Рады видеть!
         </h2>
@@ -19,31 +29,31 @@ function Login() {
           <label className="login__label">E-mail</label>
           <input
             className="login__input"
-            defaultValue=""                
+            onChange={handleChange}
+            value={values.email || ''}                           
             id="login__input-email"
             type="email"
-            name="email"
-            minLength="2"
-            maxLength="30"
+            name="email"            
             placeholder=""                
             required
           />
-          <span className="login__input-error"></span>
+          <span className={`login__input-error ${errors.email ? "login__input-error_visible" : ""}`}>{errors.email}</span>
           <label className="login__label">Пароль</label>
           <input
             className="login__input"
-            defaultValue=""
+            onChange={handleChange}
+            value={values.password || ''}            
             id="login__input-password"
             type="password"
             name="password" 
             placeholder=""               
             required
           />
-          <span className="login__input-error">Что-то пошло не так...</span>
+          <span className={`login__input-error ${errors.password ? "login__input-error_visible" : ""}`}>{errors.password}</span>
         </fieldset>
         <button
           type="submit"
-          className="login__submit"
+          className={`login__submit ${isValid ? "login__submit_abled" : "login__submit_disabled disabled"}`}
         >
           Войти
         </button>

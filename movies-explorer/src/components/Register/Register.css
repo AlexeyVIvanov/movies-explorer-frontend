@@ -55,7 +55,7 @@
 }
 
 .register__input-error {
-    display: inline-block;
+    display: none;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
@@ -64,15 +64,17 @@
     min-height: 12px;
 }
 
+.register__input-error_visible {
+    display: inline-block;
+}
+
 .register__submit {
     width: 100%;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    text-align: center;
-    color: #FFFFFF;
-    background: #3456F3;
+    text-align: center;        
     border-radius: 3px;
     margin-bottom: 16px;
     border: 0;
@@ -83,6 +85,16 @@
 .register__submit:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.register__submit_abled {
+    background: #3456F3;
+    color: #FFFFFF;
+}
+
+.register__submit_disabled {
+    background: #F8F8F8;
+    color: #000000;
 }
 
 .register__signin {

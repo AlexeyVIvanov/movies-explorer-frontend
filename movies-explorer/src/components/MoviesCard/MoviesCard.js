@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { useLocation } from "react-router-dom";
-import picture from '../../images/picture.jpg';
 
-function MoviesCard() {
+function MoviesCard(props) {
 
   const location = useLocation();
 
@@ -11,28 +10,16 @@ function MoviesCard() {
     <>
     <section className="card">
       <div className="card__info">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration">1ч 42м</p>
+        <h2 className="card__title">{props.movie.nameRU}</h2>
+        <p className="card__duration">{props.movie.duration}</p>
         <button type="button" className={
           location.pathname === "/movies"
           ? "card__like card__like_active"
           : "card__cross"}>
         </button>        
       </div>
-      <img className="card__image" src={picture} alt="Кадр фильма" />  
-    </section>
-    <section className="card">
-      <div className="card__info">
-        <h2 className="card__title">33 слова о дизайне</h2>
-        <p className="card__duration">1ч 42м</p>
-        <button type="button" className={
-          location.pathname === "/movies"
-          ? "card__like"
-          : "card__cross"}>
-        </button>        
-      </div>
-      <img className="card__image" src={picture} alt="Кадр фильма" />  
-    </section>    
+      <img className="card__image" src={props.movie.image} alt="Кадр фильма" />  
+    </section>        
   </>
   );
 }
