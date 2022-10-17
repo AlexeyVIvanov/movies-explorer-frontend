@@ -24,7 +24,15 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [movies, setMovies] = React.useState([]);
+  // массив всех фильмов
+  const [movies, setMovies] = React.useState([]);  
+  // массив сохраненных фильмов 
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  // счетчик фильмов на странице
+  const [counterMovies, setCounterMovies] = React.useState(0);
+  // состояние чекбокса
+  const [checkBox, setCheckBox] = React.useState(false);
+  const [preload, setPreload] = React.useState(false);
   
   const history = useHistory();
 
@@ -89,6 +97,9 @@ function App() {
 
   function onLogout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("inputValue");
+    localStorage.removeItem("checkbox");
+    localStorage.removeItem("films");
     setLoggedIn(false);    
     history.push("/");
   }
@@ -102,33 +113,92 @@ function App() {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
+  }; 
+
+  // поиск фильма
+  const handleSearchFilm = (inputValue) => {
+    setPreload(true);
+    localStorage.setItem("inputValue", inputValue);
+    localStorage.setItem("checkbox", checkBox);
+      moviesapi
+      .getMovies()
+      .then((movies) => {
+        const films = checkBox ? movies.filter(movie => (movie.nameRU.toLowerCase().includes(inputValue.toLowerCase()) ||
+                                 movie.nameEN.toLowerCase().includes(inputValue.toLowerCase())) && movie.duration <= 40)
+                               : movies.filter(movie => (movie.nameRU.toLowerCase().includes(inputValue.toLowerCase()) ||
+                                 movie.nameEN.toLowerCase().includes(inputValue.toLowerCase())));
+          setMovies(films)       
+        localStorage.setItem("films", JSON.stringify(films));        
+      })    
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      })
+      .finally(() => { 
+        setPreload(false)
+      })
   };
 
-  const handleSearchFilm = () => {
-    moviesapi
-      .getMovies()
-      .then(({ movie }) => {        
-        setMovies(movie);        
-      })
+  // показ 7 фильмов
+  React.useEffect(() => {     
+    setCounterMovies(7)   
+  }, [])
+
+  // показ еще 7 фильмов
+  function handleMoreMovies() {    
+      setCounterMovies(counterMovies+7);    
+  }
+
+  // функция состояния чекбокса
+  function handleCheckBox() { 
+    if (!checkBox) {
+      setCheckBox(true)
+    } else {
+      setCheckBox(false)
+    }    
+    //setCheckBox(true);    
+  }
+
+  //* Получение массива сохраненных фильмов
+  //React.useEffect(() => {
+  //  if (loggedIn) {
+  //    api
+  //      .getSavedMovies()
+  //      .then((movies) => {
+  //        setSavedMovies(movies);
+  //      })
+  //      .catch(err => {
+  //        console.log(err);
+  //      })
+  //  }
+  //}, [loggedIn]);
+
+
+  //* Получение массива сохраненных фильмов
+  const handleSavedFilm = (inputValue) => {    
+      api
+      .getSavedMovies()
+      .then(({ data: movies }) => {
+        console.log(movies)
+        const films = checkBox ? movies.filter(movie => (movie.nameRU.toLowerCase().includes(inputValue.toLowerCase()) ||
+                                 movie.nameEN.toLowerCase().includes(inputValue.toLowerCase())) && movie.duration <= 40)
+                               : movies.filter(movie => (movie.nameRU.toLowerCase().includes(inputValue.toLowerCase()) ||
+                                 movie.nameEN.toLowerCase().includes(inputValue.toLowerCase())));
+        setSavedMovies(films)                                      
+      })    
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
   };
 
-  // отобразить массив фильмов
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      moviesapi
-      .getMovies()
-      .then(({ movie}) => {        
-        setMovies(movie);        
+  //* Сохранение фильма
+  function handleSaveMovie(data) {
+    api
+      .createMovie(data)
+      .then(({data: movie}) => {
+        setSavedMovies([movie, ...movies]);
       })
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
-    }
-  }, [loggedIn]);
+      .catch(err => console.log(err))
+  };
 
   return (
     <div className="common root">
@@ -144,15 +214,22 @@ function App() {
               loggedIn={loggedIn}
               component={Movies}
               handleSearchFilm={handleSearchFilm}
-              movies={movies}              
+              movies={movies}
+              counterMovies={counterMovies}
+              handleMoreMovies={handleMoreMovies}
+              handleCheckBox={handleCheckBox}
+              onLikeClick={handleSaveMovie}
+              preload={preload}                            
             />
             <ProtectedRoute
               exact
               path="/saved-movies"
               loggedIn={loggedIn}
               component={SavedMovies}
-              handleSearchFilm={handleSearchFilm}
-              movies={movies}              
+              handleSavedFilm={handleSavedFilm}
+              movies={savedMovies}                
+              counterMovies={counterMovies}
+              handleCheckBox={handleCheckBox}             
             />
             <ProtectedRoute
               exact

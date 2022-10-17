@@ -43,7 +43,7 @@ class Api {
     }).then(this._checkResponse);
   }  
 
-  createMovie(/*{ name, link }*/) {
+  createMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {    
@@ -51,8 +51,17 @@ class Api {
       "Content-Type": "application/json",
   },  
       body: JSON.stringify({
-        /*name,
-        link,*/
+        country: data.country,
+        director: data.director,
+        duration: data.duration, 
+        year: data.year, 
+        description: data.description,
+        image: data.image,
+        trailer: data.trailerLink,
+        thumbnail: data.thumbnail,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
       }),
     }).then(this._checkResponse);
   }

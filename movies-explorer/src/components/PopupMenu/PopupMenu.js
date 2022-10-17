@@ -28,7 +28,7 @@ function PopupMenu() {
           </Link>
         </button>
       </div> 
-      <div class="popupmenu__overlay"></div>     
+      <div className="popupmenu__overlay"></div>     
     </section>
   );
 }

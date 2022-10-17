@@ -12,10 +12,12 @@ function SavedMovies(props) {
       <Header
         style={{ background: "#FFFFFF" }}
       /> 
-      <SearchForm
-        handleSearchFilm={props.handleSearchFilm} />
+      <SearchForm        
+        handleCheckBox={props.handleCheckBox}
+        handleSavedFilm={props.handleSavedFilm} />
       <MoviesCardList
-        movies={props.movies} />
+        movies={props.movies}
+        counterMovies={props.counterMovies} />
       <Footer />
     </>
   );
