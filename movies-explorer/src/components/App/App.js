@@ -177,7 +177,7 @@ function App() {
   const handleSavedFilm = (inputValue) => {    
       api
       .getSavedMovies()
-      .then(({ data: movies }) => {
+      .then((movies) => {
         console.log(movies)
         const films = checkBox ? movies.filter(movie => (movie.nameRU.toLowerCase().includes(inputValue.toLowerCase()) ||
                                  movie.nameEN.toLowerCase().includes(inputValue.toLowerCase())) && movie.duration <= 40)
@@ -193,9 +193,10 @@ function App() {
   //* Сохранение фильма
   function handleSaveMovie(data) {
     api
-      .createMovie(data)
-      .then(({data: movie}) => {
-        setSavedMovies([movie, ...movies]);
+      .createMovie(data)      
+      .then(({ data: movie }) => {        
+        console.log(movie)
+        setSavedMovies([movie, ...movies]);        
       })
       .catch(err => console.log(err))
   };

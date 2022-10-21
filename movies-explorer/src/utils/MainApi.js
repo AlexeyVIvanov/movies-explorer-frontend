@@ -56,12 +56,12 @@ class Api {
         duration: data.duration, 
         year: data.year, 
         description: data.description,
-        image: data.image,
-        trailer: data.trailerLink,
-        thumbnail: data.thumbnail,
-        movieId: data.id,
+        image: `https://api.nomoreparties.co/${data.image.url}`,
+        trailerLink: data.trailerLink,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
+        thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
+        movieId: data.id,        
       }),
     }).then(this._checkResponse);
   }

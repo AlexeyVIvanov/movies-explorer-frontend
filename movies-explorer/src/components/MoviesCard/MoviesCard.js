@@ -26,6 +26,8 @@ function MoviesCard(props) {
   function handleLikeClick() {
     if (!isLiked) {
       setIsLiked(true)
+      // props.movie ????
+      props.onLikeClick(props.movie);
     } else {
       setIsLiked(false)
     } 
@@ -47,16 +49,18 @@ function MoviesCard(props) {
         <h2 className="card__title">{props.movie.nameRU}</h2>
         <p className="card__duration">{props.movie.duration}</p>
         <button
-          type="submit"
+          type="text"
           onClick={handleLikeClick}
-          onSubmit={handleLikeSavedFilms}
+          /*onSubmit={handleLikeSavedFilms}*/
           className={
             location.pathname === "/movies"
             ? cardLikeButtonClassName
             : "card__cross"}>
         </button>        
       </div>
-      <img className="card__image" src={`https://api.nomoreparties.co/${props.movie.image.url}`} alt="Кадр фильма" />  
+      <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className="card__image" src={`https://api.nomoreparties.co/${props.movie.image.url}`} alt="Кадр фильма" />
+      </a>  
     </section>        
   </>
   );
